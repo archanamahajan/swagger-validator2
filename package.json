@@ -3,9 +3,7 @@
   "version": "1.2.0",
   "description": "This app will verify that all elements of uploaded swagger are match with the swagger standard.",
   "contributors": [
-    "Jeff Marquez <jm.lue.42@gmail.com>",
-    "Allen Clayton <ajclayton@gmail.com>",
-    "Christopher Kelley <cbkelley717@gmail.com>"
+    "Archana Mahajan <archanamahajan10@gmail.com>"
   ],
   "license": "GNU",
   "main": "index.js",
