@@ -27,21 +27,25 @@ module.exports = swaggerValidator = function(options){
 
 	this.fetchAndValidate = function(swaggerEndpoint, reporter, callback){
 		apiDefCrawler.getDefs(swaggerEndpoint, function(err, root, defs){
-			linter(root, defs, function(err, result){
-				if (_.isString(reporter)){
-					try {
-						var report = require('./reporters/' + reporter);
-					} catch (ex) {
-						console.log('could not find requested reporter');
+			if(err != null){
+				callback(err);
+			} else{
+				linter(root, defs, function(err, result){
+					if (_.isString(reporter)){
+						try {
+							var report = require('./reporters/' + reporter);
+						} catch (ex) {
+							console.log('could not find requested reporter');
+						}
+						report(defs, result);
+					} else if (_.isFunction(reporter)) {
+						callback = reporter;
 					}
-					report(defs, result);
-				} else if (_.isFunction(reporter)) {
-					callback = reporter;
-				}
-				if (_.isFunction(callback)){
-					callback(result);
-				}
-			});
+					if (_.isFunction(callback)){
+						callback(result);
+					}
+				});
+			}
 		});
 	};
 
